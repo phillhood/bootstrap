@@ -1,0 +1,3 @@
+# Foundational (shell + the dotfiles symlink manager)
+zsh
+stow

@@ -1,0 +1,17 @@
+# CLI tooling
+starship
+atuin
+fnm
+eza
+bat
+ripgrep
+fzf
+zoxide
+direnv
+jq
+uv
+rustup
+go
+tmux
+neovim
+fastfetch

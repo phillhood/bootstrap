@@ -1,0 +1,7 @@
+# Kubernetes tooling (installed only with --k8s / WITH_K8S=1)
+kubectl
+kubectx
+k9s
+helm
+kubeseal
+argocd
