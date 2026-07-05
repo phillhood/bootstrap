@@ -56,12 +56,13 @@ done
 
 require_not_root
 detect_distro
-run_step "Packages"       step_packages
-run_step "Dotfiles"       step_dotfiles
-run_step "Default shell"  step_shell
-run_step "tmux plugins"   step_tmux
-run_step "Rust + Node"    step_rust_node
-run_step "Docker"         step_docker
+run_step "Packages" step_packages
+run_step "Dotfiles" step_dotfiles
+run_step "Canonical config" step_canonical
+run_step "Default shell" step_shell
+run_step "tmux plugins" step_tmux
+run_step "Rust + Node" step_rust_node
+run_step "Docker" step_docker
 
 [ -x "$BOOTSTRAP_DIR/kek/run" ] && "$BOOTSTRAP_DIR/kek/run" || true
 

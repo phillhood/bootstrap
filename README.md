@@ -28,10 +28,12 @@ Run as your normal user (not root); it uses `sudo` where needed.
 
 1. Install `yay` + packages (`packages/*.txt`): zsh, stow, and the CLI/docker/Kubernetes toolchain.
 2. Clone `phillhood/.dotfiles` → `~/.dotfiles` and `make install` (stow symlinks).
-3. Set the login shell to zsh.
-4. Install the tmux plugin manager (tpm).
-5. Default Rust toolchain (stable) + Node LTS (via fnm).
-6. Enable docker + add you to the `docker` group.
+3. Apply non-stowed `canonical/` configs — merges `canonical/.claude/settings.json` into the live
+   `~/.claude/settings.json` (deep-merge via `jq`, so plugin-generated keys are preserved).
+4. Set the login shell to zsh.
+5. Install the tmux plugin manager (tpm).
+6. Default Rust toolchain (stable) + Node LTS (via fnm).
+7. Enable docker + add you to the `docker` group.
 
 ## Configuration
 
