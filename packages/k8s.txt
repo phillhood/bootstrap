@@ -1,4 +1,4 @@
-# Kubernetes tooling (installed only with --k8s / WITH_K8S=1)
+# Kubernetes tooling
 kubectl
 kubectx
 k9s

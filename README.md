@@ -13,22 +13,20 @@ Clone-first (primary):
 ```sh
 git clone https://github.com/phillhood/bootstrap.git
 cd bootstrap
-./install.sh            # base install
-./install.sh --k8s      # + Kubernetes tooling
+./install.sh
 ```
 
 One-liner (convenience — `install.sh` clones itself and re-execs):
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/phillhood/bootstrap/main/install.sh | bash
-curl -fsSL https://raw.githubusercontent.com/phillhood/bootstrap/main/install.sh | WITH_K8S=1 bash
 ```
 
 Run as your normal user (not root); it uses `sudo` where needed.
 
 ## What it does
 
-1. Install `yay` + packages (`packages/*.txt`): zsh, stow, and the CLI/docker toolchain (+k8s with `--k8s`).
+1. Install `yay` + packages (`packages/*.txt`): zsh, stow, and the CLI/docker/Kubernetes toolchain.
 2. Clone `phillhood/.dotfiles` → `~/.dotfiles` and `make install` (stow symlinks).
 3. Set the login shell to zsh.
 4. Install the tmux plugin manager (tpm).
@@ -39,7 +37,6 @@ Run as your normal user (not root); it uses `sudo` where needed.
 
 | Env | Default | Purpose |
 | --- | --- | --- |
-| `WITH_K8S` | `0` | `1` (or `--k8s`) also installs Kubernetes tooling |
 | `DOTFILES_REPO` | `https://github.com/phillhood/.dotfiles.git` | dotfiles repo to clone |
 | `DOTFILES_BRANCH` | `main` | branch to clone |
 

@@ -4,34 +4,27 @@ set -euo pipefail
 # Fresh-machine provisioner for Arch Linux. Installs packages, then clones and
 # stows the dotfiles. Safe to re-run.
 #
-# Usage: ./install.sh [--k8s]
-# Env: WITH_K8S=1, DOTFILES_REPO=<url>, DOTFILES_BRANCH=<name>
+# Usage: ./install.sh
+# Env: DOTFILES_REPO=<url>, DOTFILES_BRANCH=<name>
 
 usage() {
   cat <<'EOF'
-Usage: install.sh [--k8s] [--help]
-  --k8s        also install Kubernetes tooling (kubectl, k9s, helm, ...)
+Usage: install.sh [--help]
   --help       show this help
 Env:
-  WITH_K8S=1              same as --k8s
   DOTFILES_REPO=<url>     dotfiles repo to clone (default: phillhood/.dotfiles)
   DOTFILES_BRANCH=<name>  branch to clone (default: main)
 EOF
 }
 
-WITH_K8S="${WITH_K8S:-0}"
-while [ "$#" -gt 0 ]; do
-  case "$1" in
-    --k8s) WITH_K8S=1 ;;
-    -h|--help) usage; exit 0 ;;
-    *) printf 'unknown argument: %s\n' "$1" >&2; usage; exit 1 ;;
-  esac
-  shift
-done
-export WITH_K8S
+case "${1:-}" in
+  "") ;;
+  -h|--help) usage; exit 0 ;;
+  *) printf 'unknown argument: %s\n' "$1" >&2; usage; exit 1 ;;
+esac
 
 # Locate self. If running detached (curl | bash) there are no sibling files, so
-# clone the repo and re-exec from it. WITH_K8S/DOTFILES_* propagate via the env.
+# clone the repo and re-exec from it. DOTFILES_* propagate via the env.
 SOURCE="${BASH_SOURCE[0]:-}"
 BOOTSTRAP_DIR=""
 if [ -n "$SOURCE" ] && [ -f "$SOURCE" ]; then

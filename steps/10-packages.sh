@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Step: install packages. Consumes lib/distro.sh (ensure_aur_helper, pkg_install)
-# and packages/*.txt. Honors WITH_K8S. Requires BOOTSTRAP_DIR to be set.
+# and packages/*.txt. Requires BOOTSTRAP_DIR to be set.
 
 # Print package names from the given files, stripping #-comments and blank lines.
 _read_packages() {
@@ -18,8 +18,7 @@ _read_packages() {
 step_packages() {
   ensure_aur_helper
   local dir="$BOOTSTRAP_DIR/packages"
-  local files=("$dir/core.txt" "$dir/cli.txt" "$dir/docker.txt")
-  [ "${WITH_K8S:-0}" = 1 ] && files+=("$dir/k8s.txt")
+  local files=("$dir/core.txt" "$dir/cli.txt" "$dir/docker.txt" "$dir/k8s.txt")
   local f
   for f in "${files[@]}"; do
     [ -r "$f" ] || die "package file not found: $f"
