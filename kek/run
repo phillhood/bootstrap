@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+echo -e "\nSetup complete - time to spit some bars...\n"
+sleep 1
+echo -e "boom.."
+sleep 1
+echo -e "\tbam.."
+sleep 1
+echo -e "\t\tbop.."
+sleep 2
+echo -e "\t\t\tbada-bap.."
+sleep 0.6
+echo -e "\t\t\t\t    boop.."
+sleep 0.9
+echo -e "\n"
+echo -e "\t\t\t\t ██████   ██████   ██     ██"
+echo -e "\t\t\t\t ██  ██  ██    ██  ██     ██"
+echo -e "\t\t\t\t ██████  ██    ██  ██  █  ██"
+echo -e "\t\t\t\t ██      ██    ██  ██ ███ ██"
+echo -e "\t\t\t\t ██       ██████    ███ ███ "
+echo -e "\n"
+sleep 0.5
+while IFS= read -r line; do
+  printf "%s\n" "$line"
+  sleep 0.005
+done < "$here/supaHotFire"
+echo -e "\n"
+echo -e "\tThis system has been blessed by SupaHotFire.\n"
+echo -e "\n\n"
