@@ -6,8 +6,8 @@
 # and needs jq (installed in step_packages).
 
 step_canonical() {
-  local base="$HOME/.dotfiles/canonical"
-  [ -d "$base" ] || { info "no canonical/ dir in dotfiles; skipping"; return 0; }
+  local base="$HOME/.dotfiles/tools/canonical"
+  [ -d "$base" ] || { info "no tools/canonical/ dir in dotfiles; skipping"; return 0; }
 
   # ~/.claude/settings.json: deep-merge our prefs ON TOP of the live file, so a
   # freshly-installed plugin's generated keys (e.g. GSD hooks) survive.
