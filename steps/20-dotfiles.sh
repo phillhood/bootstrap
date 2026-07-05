@@ -3,7 +3,7 @@
 
 step_dotfiles() {
   local repo="${DOTFILES_REPO:-https://github.com/phillhood/.dotfiles.git}"
-  local branch="${DOTFILES_BRANCH:-main}"
+  local branch="${DOTFILES_BRANCH:-stow}"
   local dest="$HOME/.dotfiles"
   if [ ! -d "$dest/.git" ]; then
     info "cloning dotfiles ($repo @ $branch)"

@@ -38,10 +38,7 @@ Run as your normal user (not root); it uses `sudo` where needed.
 | Env | Default | Purpose |
 | --- | --- | --- |
 | `DOTFILES_REPO` | `https://github.com/phillhood/.dotfiles.git` | dotfiles repo to clone |
-| `DOTFILES_BRANCH` | `main` | branch to clone |
-
-**Dotfiles branch:** the stow layout currently lives on the dotfiles `stow` branch. Until it is
-on `main`, run with `DOTFILES_BRANCH=stow` (or push/merge the stow layout to `main`).
+| `DOTFILES_BRANCH` | `stow` | branch to clone |
 
 ## Extending to other distros
 

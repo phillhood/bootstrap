@@ -13,7 +13,7 @@ Usage: install.sh [--help]
   --help       show this help
 Env:
   DOTFILES_REPO=<url>     dotfiles repo to clone (default: phillhood/.dotfiles)
-  DOTFILES_BRANCH=<name>  branch to clone (default: main)
+  DOTFILES_BRANCH=<name>  branch to clone (default: stow)
 EOF
 }
 
