@@ -1,0 +1,58 @@
+# bootstrap
+
+Fresh-machine provisioner for Arch Linux. Installs packages, then clones and stows
+[phillhood/.dotfiles](https://github.com/phillhood/.dotfiles). Idempotent — safe to re-run.
+
+One-way dependency: this repo provisions the machine and deploys the dotfiles; the dotfiles
+repo does only symlink management and knows nothing about this one.
+
+## Usage
+
+Clone-first (primary):
+
+```sh
+git clone https://github.com/phillhood/bootstrap.git
+cd bootstrap
+./install.sh            # base install
+./install.sh --k8s      # + Kubernetes tooling
+```
+
+One-liner (convenience — `install.sh` clones itself and re-execs):
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/phillhood/bootstrap/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/phillhood/bootstrap/main/install.sh | WITH_K8S=1 bash
+```
+
+Run as your normal user (not root); it uses `sudo` where needed.
+
+## What it does
+
+1. Install `yay` + packages (`packages/*.txt`): zsh, stow, and the CLI/docker toolchain (+k8s with `--k8s`).
+2. Clone `phillhood/.dotfiles` → `~/.dotfiles` and `make install` (stow symlinks).
+3. Set the login shell to zsh.
+4. Install the tmux plugin manager (tpm).
+5. Default Rust toolchain (stable) + Node LTS (via fnm).
+6. Enable docker + add you to the `docker` group.
+
+## Configuration
+
+| Env | Default | Purpose |
+| --- | --- | --- |
+| `WITH_K8S` | `0` | `1` (or `--k8s`) also installs Kubernetes tooling |
+| `DOTFILES_REPO` | `https://github.com/phillhood/.dotfiles.git` | dotfiles repo to clone |
+| `DOTFILES_BRANCH` | `main` | branch to clone |
+
+**Dotfiles branch:** the stow layout currently lives on the dotfiles `stow` branch. Until it is
+on `main`, run with `DOTFILES_BRANCH=stow` (or push/merge the stow layout to `main`).
+
+## Extending to other distros
+
+`lib/distro.sh` is the single dispatch point — `detect_distro` and `pkg_install` have a `case`
+with an `arch` arm and a `die` default. Add a `debian`/`ubuntu` arm (and per-distro package
+handling) there to support another distro.
+
+## TODO
+
+- Container smoke-test: run the full install in a clean Arch container and assert idempotency +
+  key binaries on PATH. The chezmoi-era version caught real bugs; port it here.
