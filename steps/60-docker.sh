@@ -8,10 +8,10 @@ step_docker() {
   else
     warn "systemd not running; skipping docker.service enable"
   fi
-  if ! id -nG "$USER" | tr ' ' '\n' | grep -qx docker; then
-    info "adding $USER to docker group (re-login required to take effect)"
-    sudo usermod -aG docker "$USER"
+  if ! id -nG "$(id -un)" | tr ' ' '\n' | grep -qx docker; then
+    info "adding $(id -un) to docker group (re-login required to take effect)"
+    sudo usermod -aG docker "$(id -un)"
   else
-    info "$USER already in docker group"
+    info "$(id -un) already in docker group"
   fi
 }

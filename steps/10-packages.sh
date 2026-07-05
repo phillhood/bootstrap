@@ -20,6 +20,10 @@ step_packages() {
   local dir="$BOOTSTRAP_DIR/packages"
   local files=("$dir/core.txt" "$dir/cli.txt" "$dir/docker.txt")
   [ "${WITH_K8S:-0}" = 1 ] && files+=("$dir/k8s.txt")
+  local f
+  for f in "${files[@]}"; do
+    [ -r "$f" ] || die "package file not found: $f"
+  done
   local pkgs; mapfile -t pkgs < <(_read_packages "${files[@]}")
   info "installing ${#pkgs[@]} packages via the package manager"
   pkg_install "${pkgs[@]}"

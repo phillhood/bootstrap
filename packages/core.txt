@@ -1,3 +1,5 @@
-# Foundational (shell + the dotfiles symlink manager)
+# Foundational (shell + dotfiles symlink manager + provisioning tools)
 zsh
 stow
+git
+make

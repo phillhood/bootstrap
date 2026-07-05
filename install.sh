@@ -38,8 +38,12 @@ if [ -n "$SOURCE" ] && [ -f "$SOURCE" ]; then
   BOOTSTRAP_DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
 fi
 if [ -z "$BOOTSTRAP_DIR" ] || [ ! -d "$BOOTSTRAP_DIR/lib" ]; then
+  if [ -n "${BOOTSTRAP_REEXEC:-}" ]; then
+    echo "error: re-exec failed — lib/ not found in the cloned repo" >&2; exit 1
+  fi
+  export BOOTSTRAP_REEXEC=1
   echo "==> fetching bootstrap repo (running detached)" >&2
-  command -v git >/dev/null 2>&1 || sudo pacman -Sy --needed --noconfirm git
+  command -v git >/dev/null 2>&1 || sudo pacman -S --needed --noconfirm git
   BOOTSTRAP_DIR="${BOOTSTRAP_REPO_DIR:-$HOME/Dev/phillhood/bootstrap}"
   if [ ! -d "$BOOTSTRAP_DIR/.git" ]; then
     git clone --depth 1 "${BOOTSTRAP_REPO:-https://github.com/phillhood/bootstrap.git}" "$BOOTSTRAP_DIR"
